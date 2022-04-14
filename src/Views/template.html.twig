@@ -28,8 +28,8 @@
 
             <ul>
             {% if auth == false %}
-                <li><a href="{{baseUrl}}/loginPage">Se connecter</a></li>
-                <li><a href="{{baseUrl}}/create_accountPage">S'enregistrer</a></li>
+                <li><a href="{{baseUrl}}/login">Se connecter</a></li>
+                <li><a href="{{baseUrl}}/create_account">S'enregistrer</a></li>
             {% else %}
                 <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
                 <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
@@ -38,8 +38,8 @@
         </nav>
             <ul class="menu">
             {% if auth == false %}
-                <li><a href="{{baseUrl}}/loginPage">Se connecter</a></li>
-                <li><a href="{{baseUrl}}/create_accountPage">S'enregistrer</a></li>
+                <li><a href="{{baseUrl}}/login">Se connecter</a></li>
+                <li><a href="{{baseUrl}}/create_account">S'enregistrer</a></li>
             {% else %}
                 <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
                 <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
