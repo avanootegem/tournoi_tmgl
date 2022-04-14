@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    {% block css %}
+    <link rel="stylesheet" href="{{baseUrl}}/assets/css/style.css">
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+    
+    {% block navigation %}
+        <nav>
+            <form action="{{baseUrl}}/search_movies" method="POST" class="research-bar">
+                <input name="research" type="text" id="research" placeholder="Rechercher un film" autocomplete="off">
+                <ul id="searchList"></ul>
+                <svg xmlns="http://www.w3.org/2000/svg" width="23.809" height="24" viewBox="0 0 23.809 24">
+                    <path id="iconmonstr-magnifier-2" d="M23.809,21.646l-6.2-6.2a9.736,9.736,0,1,0-2.387,2.321L21.455,24l2.354-2.354ZM2.854,9.73a6.877,6.877,0,1,1,6.877,6.877A6.885,6.885,0,0,1,2.854,9.73Z"/>
+                </svg>
+            </form>
+            <div class="menu-burger">
+                <span id="menu-icon"></span>
+            </div>
+
+            <ul>
+            {% if auth == false %}
+                <li><a href="{{baseUrl}}/loginPage">Se connecter</a></li>
+                <li><a href="{{baseUrl}}/create_accountPage">S'enregistrer</a></li>
+            {% else %}
+                <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
+                <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
+                {% if auth.admin == 3 %}
+                    <li><a href="{{baseUrl}}/createPage">Ajouter</a></li>
+                {% endif %}
+            {% endif %}
+            </ul>
+        </nav>
+            <ul class="menu">
+            {% if auth == false %}
+                <li><a href="{{baseUrl}}/loginPage">Se connecter</a></li>
+                <li><a href="{{baseUrl}}/create_accountPage">S'enregistrer</a></li>
+            {% else %}
+                <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
+                <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
+                {% if auth.admin == 3 %}
+                    <li><a href="{{baseUrl}}/createPage">Ajouter</a></li>
+                {% endif %}
+            {% endif %}
+            </ul>
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
+    </div>
+    {% block js %}
+    <script>
+
+        const menuBurger = document.querySelector('.menu-burger');
+        const menu = document.querySelector('.menu');
+        console.log(menuBurger)
+
+        menuBurger.addEventListener('click', () => {
+            menuBurger.classList.toggle("change")
+            menu.classList.toggle("change")
+        })
+
+
+    </script>
+    <script>
+        const searchBar = document.querySelector('#research');
+        const formSearchBar = document.querySelector('.research-bar');
+        const ul = document.getElementById('searchList');
+
+        let timeout = null;
+        let li = ``;
+
+        searchBar.addEventListener('input', () => {
+            clearTimeout(timeout);
+            let formData = new FormData(formSearchBar);
+            fetch('{{baseUrl}}/search', {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => timeout = setTimeout(function () {data.forEach(element => {
+                    if (searchBar.value != '') {
+                        li += `
+                            <a href="{{baseUrl}}/movie/${element.id_movie}"><li><img src="{{baseUrl}}/assets/img/${element.poster}" alt="poster"/><div class="title-container"><h3 class="search-list-title">${element.title}</h3><p class="search-list-p">(${element.year})</p></div></li></a>
+                        `;
+                    } else {
+                        ul.innerHTML = '';
+                    }
+                })
+            ul.innerHTML = li;
+            li = ``;
+            }), 0);
+        })
+    </script>
+    {% endblock %}
+</body>
+</html>
