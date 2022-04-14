@@ -13,6 +13,7 @@
     
     {% block navigation %}
         <nav>
+            {# 
             <form action="{{baseUrl}}/search_movies" method="POST" class="research-bar">
                 <input name="research" type="text" id="research" placeholder="Rechercher un film" autocomplete="off">
                 <ul id="searchList"></ul>
@@ -20,6 +21,7 @@
                     <path id="iconmonstr-magnifier-2" d="M23.809,21.646l-6.2-6.2a9.736,9.736,0,1,0-2.387,2.321L21.455,24l2.354-2.354ZM2.854,9.73a6.877,6.877,0,1,1,6.877,6.877A6.885,6.885,0,0,1,2.854,9.73Z"/>
                 </svg>
             </form>
+            #}
             <div class="menu-burger">
                 <span id="menu-icon"></span>
             </div>
@@ -31,9 +33,6 @@
             {% else %}
                 <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
                 <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
-                {% if auth.admin == 3 %}
-                    <li><a href="{{baseUrl}}/createPage">Ajouter</a></li>
-                {% endif %}
             {% endif %}
             </ul>
         </nav>
@@ -44,9 +43,6 @@
             {% else %}
                 <li><a href="{{baseUrl}}/my_account">Mon compte</a></li>
                 <li><a href="{{baseUrl}}/logout">Se déconnecter</a></li>
-                {% if auth.admin == 3 %}
-                    <li><a href="{{baseUrl}}/createPage">Ajouter</a></li>
-                {% endif %}
             {% endif %}
             </ul>
     {% endblock %}
