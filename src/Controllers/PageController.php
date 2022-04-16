@@ -2,7 +2,10 @@
 
 namespace App\Controllers;
 
+
+use App\Models\TournamentModel
 use App\Models\UserModel;
+
 
 class PageController extends GeneralController
 {
@@ -12,20 +15,42 @@ class PageController extends GeneralController
     }
 
     public function home()
-    {
+    {   
         $auth = $_SESSION['auth'];
         $flash = flash();
-        $template = $this->twig->load('home.html.twig');
-        echo $template->render([
-            "auth" => $auth,
-            "flash" => $flash
-        ]);
+        $tournamentModel = new TournamentModel();
+        $lastTournament = $tournamentModel->getLastTounament();
+        if($lastTournament['type'] == 1) {
+            $type = "Qualif";
+            $tournament = $lastTournament;
+            $template = $this->twig->load('home.html.twig');
+            echo $template->render([
+                "type" => $type,
+                "tournament" => $tournament
+            ]);
+        } else {
+            $type = "Championship";
+            $masters = $tournamentModel->getRankingT($lastTournament['saison'], "Master");
+            $challengers = $tournamentModel->getRankingT($lastTournament['saison'], "Challenger");
+            $outsiders = $tournamentModel->getRankingT($lastTournament['saison'], "Outsider");
+            $template = $this->twig->load('home.html.twig');
+            echo $template->render([
+                "auth" => $auth,
+                "flash" => $flash
+                "type" => $type,
+                "saison" => $lastTournament['saison'],
+                "masters" => $masters,
+                "challengers" => $challengers,
+                "outsiders" => $outsiders
+            ]); 
+        }
     }
 
     public function create_account()
     {
         $template = $this->twig->load('account/create_account.html.twig');
         echo $template->render([]);
+
     }
 
     public function creating_account()

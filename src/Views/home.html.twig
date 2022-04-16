@@ -9,9 +9,33 @@
 			</div>
 		{% endif %}
 
-		<div>
-			<h2>Accueil</h2>
-		</div>
+		<h2> Resultats dernier tournoi : </h2>
+
+		{% if type == "Qualif" %}
+			{{dump(tournament)}}
+		{% else %}
+			{% for master in masters %}
+				{{dump(master)}}
+				<br>
+				<br>
+			{% endfor %}
+			<br>
+			<br>
+			<br>
+			{% for challenger in challengers %}
+				{{dump(challenger)}}
+				<br>
+				<br>
+			{% endfor %}
+			<br>
+			<br>
+			<br>
+			{% for outsider in outsiders %}
+				{{dump(outsider)}}
+				<br>
+				<br>
+			{% endfor %}
+		{% endif %}
 
 	</div>
 {% endblock %}
