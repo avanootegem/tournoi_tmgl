@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 
-use App\Models\TournamentModel
+use App\Models\TournamentModel;
 use App\Models\UserModel;
 
 
@@ -36,7 +36,7 @@ class PageController extends GeneralController
             $template = $this->twig->load('home.html.twig');
             echo $template->render([
                 "auth" => $auth,
-                "flash" => $flash
+                "flash" => $flash,
                 "type" => $type,
                 "saison" => $lastTournament['saison'],
                 "masters" => $masters,
