@@ -9,33 +9,107 @@
 			</div>
 		{% endif %}
 
-		<h2> Resultats dernier tournoi : </h2>
+		<h2> Resultats tournoi en cours : </h2>
 
+		
 		{% if type == "Qualif" %}
 			{{dump(tournament)}}
 		{% else %}
-			{% for master in masters %}
-				{{dump(master)}}
-				<br>
-				<br>
-			{% endfor %}
-			<br>
-			<br>
-			<br>
-			{% for challenger in challengers %}
-				{{dump(challenger)}}
-				<br>
-				<br>
-			{% endfor %}
-			<br>
-			<br>
-			<br>
-			{% for outsider in outsiders %}
-				{{dump(outsider)}}
-				<br>
-				<br>
-			{% endfor %}
+			<div class = "championship">
+				<div>
+					<table>
+						<colgroup>
+							<col class="pseudo">
+							<col class="medals" span="4">
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="categorie" colspan="5"> Master </th>
+							</tr>
+							<tr>
+								<th> Pseudo </th>
+								<th> Champ </th>
+								<th> Gold </th>
+								<th> Silver </th>
+								<th> Bronze </th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for master in masters %}
+								<tr>
+									<td> {{ master.pseudo }} </td>
+									<td> {{ master.champ_medal }} </td>
+									<td> {{ master.gold_medal }} </td>
+									<td> {{ master.silver_medal }} </td>
+									<td> {{ master.bronze_medal }} </td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<table>
+						<colgroup>
+							<col class="pseudo">
+							<col class="medals" span="4">
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="categorie" colspan="5"> Challenger </th>
+							</tr>
+							<tr>
+								<th> Pseudo </th>
+								<th> Champ </th>
+								<th> Gold </th>
+								<th> Silver </th>
+								<th> Bronze </th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for challenger in challengers %}
+								<tr>
+									<td> {{ challenger.pseudo }} </td>
+									<td> {{ challenger.champ_medal }} </td>
+									<td> {{ challenger.gold_medal }} </td>
+									<td> {{ challenger.silver_medal }} </td>
+									<td> {{ challenger.bronze_medal }} </td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<table>
+						<colgroup>
+							<col class="pseudo">
+							<col class="medals" span="4">
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="categorie" colspan="5"> Outsider </th>
+							</tr>
+							<tr>
+								<th> Pseudo </th>
+								<th> Champ </th>
+								<th> Gold </th>
+								<th> Silver </th>
+								<th> Bronze </th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for outsider in outsiders %}
+								<tr>
+									<td> {{ outsider.pseudo }} </td>
+									<td> {{ outsider.champ_medal }} </td>
+									<td> {{ outsider.gold_medal }} </td>
+									<td> {{ outsider.silver_medal }} </td>
+									<td> {{ outsider.bronze_medal }} </td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
 		{% endif %}
-
 	</div>
 {% endblock %}
