@@ -1,10 +1,10 @@
-.body-content{
-    display: flex;
-    flex-direction: column;
+.body-content {
+    display: grid;
+    grid-template-columns: 100%;
     padding: clamp(2.5em, 4vw, 4em);
-    padding-top: 11vh;
+    padding-top: 6.5vh;
 
-    a{
+    a {
         color: #457564;
         text-align: right;
         margin-right: 1rem;
@@ -12,44 +12,84 @@
         font-weight: 700;
     }
 
-    li a{
+    li a {
         color: #333;
     }
 
-    h2{
+    h2 {
         font-family: 'lato', sans-serif;
         font-size: 3rem;
         margin-left: 1rem;
         color: #457564;
     }
     
-    h3{
+    h3 {
         font-size: 2rem;
         font-family: 'lato', sans-serif;
     }
-}
 
-
-@media (min-width: 850px){
-    .body-content{
+    .championship {
         display: grid;
-        grid-template-columns: 70% auto;
+        grid-template-columns: 33% 33% 33%;
+
+        width: 100%;
+        padding-top: 2.5vh;
+
+        table {
+            text-align: center;
+            width: 90%;
+            margin-left: 5%;
+
+            border: 2px solid black;
+            border-collapse: collapse;
+
+            th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                font-size: 1.6rem;
+                padding: 2px;
+
+                &.categorie {
+                    font-size: 2.4rem;
+                }
+            }
+
+            td {
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+            
+            col {
+                &.pseudo {
+                    width: 24%;
+                }
+
+                &.medals {
+                    width: 19%;
+                }
+            }
+        }
     }
 }
 
 @media (min-width: 1250px){
-    .body-content .home-container .home-container-content{
-        display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
-    }
 
-    .body-content{
+    .body-content {
+        .home-container .home-container-content{
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+        }
+
         h3{
             font-size: 2.5rem;
         }
+
         h2{
             font-size: 4rem;
         }
-        a{font-size: 2rem;}
+
+        a{
+            font-size: 2rem;
+        }
     }
 }
